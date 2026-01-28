@@ -1,0 +1,119 @@
+<template>
+    <div if:true={isDropdownOpen} class="backdrop" onclick={closeDropdown}></div>
+ 
+    <lightning-card title="My Bookings Manager" icon-name="standard:service_appointment">
+        
+        <div slot="actions">
+            <lightning-button label="New Booking" variant="brand" icon-name="utility:add" onclick={handleCreateNew}></lightning-button>
+        </div>
+ 
+        <div class="slds-p-around_medium slds-border_bottom">
+            <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_1-of-3">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label">Filter by Status</label>
+                    <div class="slds-form-element__control">
+                        <div class={dropdownClass}>
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none" onclick={toggleDropdown}>
+                                <input type="text" class="slds-input slds-combobox__input" placeholder="Select Statuses..." readonly value={selectedStatuses}>
+                                <lightning-icon icon-name="utility:down" size="x-small" class="slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                            </div>
+                            <div class="slds-dropdown slds-dropdown_fluid slds-dropdown_length-5 slds-p-around_small">
+                                <lightning-button-icon icon-name="utility:close" variant="bare" class="close-btn" onclick={closeDropdown}></lightning-button-icon>
+                                <lightning-checkbox-group name="Status Group" label="Select Statuses" variant="label-hidden" options={statusOptions} value={selectedStatuses} onchange={handleStatusChange}></lightning-checkbox-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="date" label="Filter by Delivery Date" value={dateFilter} onchange={handleDateChange}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-3 slds-align-bottom">
+                <lightning-button label="Clear Filters" onclick={handleClear} variant="neutral" icon-name="utility:clear"></lightning-button>
+            </div>
+            </div>
+        </div>
+ 
+        <div class="slds-grid main-container">
+            
+            <div class="slds-col slds-size_2-of-3 left-panel">
+                <div class="slds-p-around_medium">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small">All Bookings</h3>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={bookings}
+                        columns={bookingColumns}
+                        onrowselection={handleRowSelection}
+                        max-row-selection="1">
+                    </lightning-datatable>
+                </div>
+            </div>
+ 
+            <div class="slds-col slds-size_1-of-3 right-panel">
+                <div class="slds-p-around_medium">
+                    
+                    <template if:true={selectedBookingName}>
+                        <div class="slds-border_bottom slds-m-bottom_medium slds-p-bottom_small">
+                            <h2 class="slds-text-heading_medium">
+                                <lightning-icon icon-name="standard:work_order_item" size="small" class="slds-m-right_small"></lightning-icon>
+                                History
+                            </h2>
+                            <p class="slds-text-color_weak slds-m-top_xx-small">For: <b>{selectedBookingName}</b></p>
+                        </div>
+                    </template>
+ 
+                    <template if:false={selectedBookingId}>
+                        <div class="slds-align_absolute-center slds-text-color_weak slds-p-top_large">
+                            Select a booking on the left to view history.
+                        </div>
+                    </template>
+ 
+                    <template if:true={selectedBookingId}>
+                         <template if:false={historyRecords}>
+                            <div class="slds-align_absolute-center slds-text-color_weak slds-p-top_large">
+                                No history changes found.
+                            </div>
+                         </template>
+                    </template>
+ 
+                    <template if:true={historyRecords}>
+                        <template for:each={historyRecords} for:item="hist">
+                            <div key={hist.Id} class="history-card">
+                                
+                                <div class="slds-grid slds-grid_align-spread slds-border_bottom slds-p-bottom_xx-small slds-m-bottom_small">
+                                    <div class="slds-text-color_weak slds-text-body_small">
+                                        <lightning-formatted-date-time value={hist.Change_Date__c} year="numeric" month="short" day="2-digit" hour="2-digit" minute="2-digit"></lightning-formatted-date-time>
+                                    </div>
+                                    <div class="slds-text-color_weak slds-text-body_small">
+                                        {hist.Changed_By__r.Name}
+                                    </div>
+                                </div>
+ 
+                                <div>
+                                    <div class="field-label">Field Changed</div>
+                                    <div class="field-value">{hist.Field_Changed__c}</div>
+ 
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="field-label" style="color:red">Old Value</div>
+                                            <div class="field-value">{hist.Old_Value__c}</div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <div class="field-label" style="color:green">New Value</div>
+                                            <div class="field-value">{hist.New_Value__c}</div>
+                                        </div>
+                                    </div>
+                                </div>
+ 
+                            </div>
+                        </template>
+                    </template>
+ 
+                </div>
+            </div>
+ 
+        </div>
+ 
+    </lightning-card>
+</template>

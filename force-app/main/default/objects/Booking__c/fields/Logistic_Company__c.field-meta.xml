@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Logistic_Company__c</fullName>
+    <label>Logistic Company</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FedEx Corp</fullName>
+                <default>false</default>
+                <label>FedEx Corp</label>
+            </value>
+            <value>
+                <fullName>DHL Group</fullName>
+                <default>false</default>
+                <label>DHL Group</label>
+            </value>
+            <value>
+                <fullName>UPS (United Parcel Service)</fullName>
+                <default>false</default>
+                <label>UPS (United Parcel Service)</label>
+            </value>
+            <value>
+                <fullName>Kuehne + Nagel</fullName>
+                <default>false</default>
+                <label>Kuehne + Nagel</label>
+            </value>
+            <value>
+                <fullName>DSV</fullName>
+                <default>false</default>
+                <label>DSV</label>
+            </value>
+            <value>
+                <fullName>Maersk</fullName>
+                <default>false</default>
+                <label>Maersk</label>
+            </value>
+            <value>
+                <fullName>DB Schenker</fullName>
+                <default>false</default>
+                <label>DB Schenker</label>
+            </value>
+            <value>
+                <fullName>CEVA Logistics</fullName>
+                <default>false</default>
+                <label>CEVA Logistics</label>
+            </value>
+            <value>
+                <fullName>Nippon Express</fullName>
+                <default>false</default>
+                <label>Nippon Express</label>
+            </value>
+            <value>
+                <fullName>C.H. Robinson</fullName>
+                <default>false</default>
+                <label>C.H. Robinson</label>
+            </value>
+            <value>
+                <fullName>XPO Logistics</fullName>
+                <default>false</default>
+                <label>XPO Logistics</label>
+            </value>
+            <value>
+                <fullName>Amazon Transportation Services</fullName>
+                <default>false</default>
+                <label>Amazon Transportation Services</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
