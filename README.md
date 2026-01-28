@@ -1,4 +1,4 @@
-# Logistics Booking Portal Assessment
+# Booking Management System
 
 ## Overview
 This repository contains the source code for the **Logistics Booking Portal**, a Salesforce Experience Cloud solution designed to allow external customers to track shipments securely.
